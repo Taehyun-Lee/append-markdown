@@ -1,6 +1,7 @@
 import argparse
-import os
 import binascii
+import json
+import os
 from os import listdir, urandom
 from os.path import isfile, join, isdir, abspath
 import shutil
@@ -39,6 +40,7 @@ parser.add_argument(
 parser.add_argument(
   "-o", "--outform",
   nargs = 1,
+  choices = ["json"],
   #required = True,
   help = "The output format file"
 )
@@ -111,6 +113,27 @@ def grab_formats(file, formats):
     Please close them by adding @?<label>\
     """)
 
+# Takes in a dictionary and outputs in json format
+def output_json(format):
+  json_out = {}
+  json_out["definitions"] = []
+
+  for definition in format:
+    def_id = definition.split("-")
+
+    json_def = {
+      "id" : def_id[-1],
+      "textdata": []
+    }
+
+    for string in format[definition][-1][0][-1]:
+      json_def["textdata"].append({
+        "string": string
+      })
+
+    json_out["definitions"].append(json_def)
+  return json.dumps(json_out, indent=2)
+
 # Parse user input
 def parse_user_input_and_get_format():
   user_input = parser.parse_args()
@@ -132,12 +155,14 @@ def parse_user_input_and_get_format():
   
   # Initializing output dictionary
   formats = {}
-  
   for file in all_files:
     grab_formats(file, formats)
 
-  print(formats)
-
+  # Output based on --outform
+  if(user_input["outform"] and user_input["outform"][0] == 'json'):
+    print(output_json(formats))
+  else:
+    print(formats)
 
 if (__name__) == "__main__":
   parse_user_input_and_get_format()
