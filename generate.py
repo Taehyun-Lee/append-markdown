@@ -18,7 +18,7 @@ def parse_user_input_and_get_format():
     grab_formats(file, formats)
 
   # Output based on --outform
-  print (output[user_input["outtype"]](formats = formats, output_format = user_input["outform"]))
+  output[user_input["outtype"]](formats = formats, output_format = user_input["outform"])
 
 if (__name__) == "__main__":
   parse_user_input_and_get_format()
