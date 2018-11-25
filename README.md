@@ -18,7 +18,7 @@ A 'format' is a label that encases a text block of your choice.
 For example,
 @!Definition
 some text
-@?Definition
+!@Definition
 
 is an example where 'some text' is enclosed by a 'format' called Definition.
 

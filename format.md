@@ -21,8 +21,6 @@ An output format json file has the following format
       "sync"           : "Whether or not you want editing the output file to make changes to the original definition."  // ** bool
     }
   ]
-
-  
 }
 ```
 
