@@ -4,7 +4,7 @@ Once you have your markdown files, you have to be able to output them
 
 You can decide to just output the json file raw, or you can specify an output format json file.
 An output format json file has the following format
-```json
+```javascript
 {
   "path"     : "Absolute or relative path of the output file", // str
   "prolog"   : "This is where you include the text that you want to print at the top of the file", // str
